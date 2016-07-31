@@ -1,1 +1,22 @@
-Searched for: <%= @searched %>
+<%= link_to('Home', root_path)%>
+
+Searched for: 
+<ul>
+<% @result.each do |x| %>
+<li>
+<%= x['first_name'] %>
+<%= x['last_name'] %>
+<%= link_to("View site", x['website']) %>
+<%= link_to("Twitter", "http://www.twitter.com/" + x['twitter_id']) if x['twitter_id'] %>
+<%= link_to("Youtube", "http://www.youtube.com/" + x['youtube_id']) if x['youtube_id']%>
+<%= link_to("Facebook", "http://www.facebook.com/" + x['facebook_id']) if x['facebook_id']%>
+<%= link_to("Contact", x['contact_form']) if x['contact_form']%>
+	<% if x['following?'] == true %>
+	<%= link_to("Unfollow", follow_politician_path(bioguide_id: x['bioguide_id'])) %>
+	<% else %>
+	<%= link_to("Follow", follow_politician_path(bioguide_id: x['bioguide_id'])) %>
+	<!-- Should eventually build an unfollow path and direct to that-->
+	<% end %>
+</li>
+<% end %>
+</ul>
