@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :searches
+  get "search" => "searches#index"
+  post "searches" => "searches#index", as: "search_rep"
   root 'home#index'
   get "test" => "home#test", as: "test" 
 

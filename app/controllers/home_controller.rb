@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
 	require 'unirest'
+	require 'congress'
 
 	def index
 	  	if user_signed_in?
@@ -11,8 +12,19 @@ class HomeController < ApplicationController
 
 	def test
 		@user = current_user
-		@resp_arr = []
+        @client = Congress::Client.new('5b435d0bb1f946168564c8398f0ccc5e')
 
+		@okoko = @client.legislators_locate('18706')
+		puts @okoko
+		@resp_arr = []
+		@user_id = "S000033"
+		@ok = Politician.find_by(bioguide_id: @user_id)
+		puts @ok.name
+
+		#@politician = Politician.create(name: "Bernie Sanders", bioguide_id: "S000033")
+		# @all_poli = Politician.last
+		# puts @all_poli.name
+		puts "I like turtles"
 		@user.update(politicians_following: [{name: "Bernie Sanders", bioguide_id: "S000033"}, {name:"Paul Ryan", bioguide_id: "R000570"}])
 		@user.politicians_following.each do |x|
 			@instance_id = x[:bioguide_id]

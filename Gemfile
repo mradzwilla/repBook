@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'unirest'
-# gem 'congress', '~> 0.3.0'
+gem 'congress'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
