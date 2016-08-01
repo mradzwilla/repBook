@@ -12,7 +12,7 @@ Searched for:
 <%= link_to("Facebook", "http://www.facebook.com/" + x['facebook_id']) if x['facebook_id']%>
 <%= link_to("Contact", x['contact_form']) if x['contact_form']%>
 	<% if x['following?'] == true %>
-	<%= link_to("Unfollow", follow_politician_path(bioguide_id: x['bioguide_id'])) %>
+	<%= link_to("Unfollow", unfollow_politician_path(bioguide_id: x['bioguide_id'])) %>
 	<% else %>
 	<%= link_to("Follow", follow_politician_path(bioguide_id: x['bioguide_id'])) %>
 	<!-- Should eventually build an unfollow path and direct to that-->

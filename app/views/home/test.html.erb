@@ -5,18 +5,30 @@
 <% end %>
 
 <% if @politicians_following %>
-	<% @politicians_following.each do |x| %>
-		<%= x %>
+<ul>
+	<% @politician_arr.each do |x| %>
+		<li>
+		<%= x['name'] %>
+		</li>
 	<% end %>
+</ul>
 <% end %>
-
+<!-- <ul>
+<#% @resp_arr.each do |x| %>
+	<li>
+	<#%= x['results'][0]['speaking'] %>
+	<#%= x['results'][0]['speaker_first']%> <%#=x['results'][0]['speaker_last'] %>
+	</li>
+<#% end %>
+</ul> -->
 <!-- <#% @resp_arr.each do |x| %>
 	<p><#%= x %></p>
 <#% end %> -->
-<!-- <#% @response.body['results'].each do |x| %>
-	<#% @link = x["capitolwords_url"] %>
-	<#% @speaker_name = x["speaker_first"] + " " + x["speaker_last"] %>
-	<#% x["speaking"].each do |i|%>
-		<p><#= link_to i, @link %> <br>-<#%=@speaker_name%></p>
-	<#% end %>
-<#% end %> -->
+
+<%= @response.body['results'].each do |x| %>
+	<% @link = x["capitolwords_url"] %>
+	<% @speaker_name = x["speaker_first"] + " " + x["speaker_last"] %>
+	<% x["speaking"].each do |i|%>
+		<p><%= link_to i, @link %> <br>-<%=@speaker_name%></p>
+	<% end %>
+<% end %>

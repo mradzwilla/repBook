@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   # resources :searches
+  get "remove_follower" => "home#unfollow_politician", as: "unfollow_politician"
   get "new_follower" => "home#follow_politician", as: "follow_politician"
   get "search" => "searches#index"
   post "searches" => "searches#index", as: "search_rep"

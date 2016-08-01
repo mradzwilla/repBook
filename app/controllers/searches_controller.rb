@@ -11,8 +11,18 @@ class SearchesController < ApplicationController
 
 		if /\A\d+{5}\z/.match(@searched)
 		 	#regex checks if search is a zip code
-		 	@result = @congress.legislators_locate(@searched)['results']
-  		else
+		 	@result = []
+		 	@response = @congress.legislators_locate(@searched)['results']
+
+		 	@response.each do |x|
+			 	if @user.politicians_following.index(x['bioguide_id']) == nil
+						x['following?'] = false
+					else
+						x['following?'] = true
+				end
+  				@result.push(x)
+  			end
+  		else #if not a 5-digit zip code
   			@result = []
   			@response = @congress.legislators(:query => @searched)['results']
 
