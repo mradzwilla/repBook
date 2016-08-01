@@ -1,28 +1,9 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app that lets you follow your representatives and will populate a news feed based on what the reps you're following have said in the Congressional Record.
 
-Things you may want to cover:
+It is powered by the congress gem (http://www.rubydoc.info/gems/congress/0.3.0) as well as the Capitol Words API (http://capitolwords.org/api/1/).
 
-* Ruby version
+Future features for this include pulling in other actions your representatives have taken from other media sources as well as populating the news feed based on interest in specific topics (ie. 'gun control','heatlhcare', etc.) or follow all politicians who have received donations from companies.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The app is still in a very rudimentary stage, has ways to go and needs a better name.

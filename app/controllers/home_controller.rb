@@ -2,15 +2,19 @@ class HomeController < ApplicationController
 	require 'unirest'
 	require 'congress'
 
-	def index
+	def signin
 	  	if user_signed_in?
-	  		redirect_to test_path
+	  		redirect_to index_path
 	  	else
 	  		redirect_to new_user_session_path
 	  	end 
 	end
 
-	def test
+	def index
+		@time = Time.new
+		@todays_date = ((@time.year)).to_s + "-" + ((@time.month-2)).to_s + "-" +@time.day.to_s
+		puts @todays_date
+
 		@user = current_user
 		@politicians_following = @user.politicians_following
 		@congress = Congress::Client.new('5b435d0bb1f946168564c8398f0ccc5e')
@@ -22,12 +26,12 @@ class HomeController < ApplicationController
 		end
 
 		@resp_arr = []
-		@user.politicians_following.each do |x|
-			@bioguide_id = x
+		@politician_arr.each do |x|
+			@bioguide_id = x.bioguide_id
 
-			@response = Unirest.get "http://capitolwords.org/api/1/text.json?bioguide_id="+@bioguide_id+"&apikey=5b435d0bb1f946168564c8398f0ccc5e",
+			@response = Unirest.get "http://capitolwords.org/api/1/text.json?bioguide_id="+@bioguide_id+"&start_date="+ @todays_date +"&apikey=5b435d0bb1f946168564c8398f0ccc5e",
 			headers:{ "Accept" => "application/json"}
-			@resp_arr.push(@response.body)
+			@resp_arr.push(@response.body['results'])
 		end
 
 		# @user.politicians_following.each do |politician|
@@ -57,7 +61,7 @@ class HomeController < ApplicationController
 
 		@user.save
 
-		redirect_to test_path
+		redirect_to root_path
 	end
 
 	def unfollow_politician
@@ -67,7 +71,7 @@ class HomeController < ApplicationController
 		@user.politicians_following.delete(@politician_id)
 		@user.save
 
-		redirect_to test_path
+		redirect_to root_path
 	end
 
 end

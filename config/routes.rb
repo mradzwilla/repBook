@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get "new_follower" => "home#follow_politician", as: "follow_politician"
   get "search" => "searches#index"
   post "searches" => "searches#index", as: "search_rep"
-  root 'home#index'
-  get "test" => "home#test", as: "test" 
+  root 'home#signin'
+  get "index" => "home#index", as: "index" 
 
   devise_for :users, controllers: { registrations: "registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
